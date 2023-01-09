@@ -66,7 +66,7 @@ module ActiveAttr
       class_attribute :filter_attributes, :instance_writer => false
       self.filter_attributes = Attributes.filter_attributes
 
-      attribute_method_suffix "" if attribute_method_matchers.none? { |matcher| matcher.prefix == "" && matcher.suffix == "" }
+      attribute_method_suffix "" if attribute_method_patterns.none? { |matcher| matcher.prefix == "" && matcher.suffix == "" }
       attribute_method_suffix "="
     end
 
@@ -346,7 +346,7 @@ module ActiveAttr
       #
       # @since 0.6.0
       def attribute_methods(name)
-        attribute_method_matchers.map { |matcher| matcher.method_name name }
+        attribute_method_patterns.map { |matcher| matcher.method_name name }
       end
 
       # Ruby inherited hook to assign superclass attributes to subclasses
